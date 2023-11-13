@@ -8,6 +8,7 @@
 import os
 import SwiftUI
 import MapKit
+import CoreLocation
 
 
 @MainActor class LocationsHandler: ObservableObject {
@@ -23,8 +24,42 @@ import MapKit
     }
 }
 
+
+
+class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var altitude: CLLocationDistance = 0.0
+    private var locationManager: CLLocationManager?
+
+    override init() {
+        super.init()
+        self.locationManager = CLLocationManager()
+        self.locationManager?.delegate = self
+        self.locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation // More suitable for altitude
+
+               // Request location authorization and start updating location
+        self.locationManager?.requestWhenInUseAuthorization()
+        self.locationManager?.startUpdatingLocation()
+    }
+
+    func startTracking() {
+        locationManager?.startUpdatingLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let currentLocation = locations.last {
+            DispatchQueue.main.async {
+                self.altitude = currentLocation.altitude
+            }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+}
 struct ContentView: View {
     let logger = Logger(subsystem: "net.appsird.multimap", category: "Demo")
+    @ObservedObject var locationViewModel = LocationViewModel()
     @ObservedObject var locationsHandler = LocationsHandler.shared
 
     @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
@@ -35,20 +70,35 @@ struct ContentView: View {
     
     
     var body: some View {
-        
+    
+       
         Map(position: $position, selection: $selectedResult){
-                        
+            
             ForEach(searchResults, id: \.self) {result in
                 Marker(item: result)
             }
             .annotationTitles(.hidden)
+            Marker("HOME", coordinate: .myHome)
+                .tint(.orange)
+                  .tag(9999)
             
             if let route {
                 MapPolyline(route)
                     .stroke(.blue, lineWidth: 5)
             }
-
+            
             UserAnnotation()
+            
+            Annotation("The Viking Ship Museum", coordinate: .theVikingMuseum) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(.background)
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(.secondary, lineWidth: 2)
+                    Image(systemName: "house")
+                        .padding(3)
+                }
+            }
         }
         .mapStyle(.standard(elevation: .realistic))
         .safeAreaInset(edge: .bottom) {
@@ -63,15 +113,20 @@ struct ContentView: View {
                     }
                     Buttons(position: $position, searchResults: $searchResults, visibleRegion: visibleRegion)
                         .padding(.top)
+                   
+                    
                 }
-                Spacer()
+                
+//
+               
+             
             }
             .background(.thinMaterial)
         }
         .onChange(of: searchResults) {
             withAnimation{
                 position = .automatic
-           }
+            }
         }
         .onChange(of: selectedResult) {
             getDirections()
@@ -84,6 +139,10 @@ struct ContentView: View {
             MapCompass()
             MapScaleView()
         }
+       
+       
+               
+    
     }
     
     func getDirections() {
@@ -109,3 +168,10 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+extension CLLocationCoordinate2D {
+   
+    static let theVikingMuseum = CLLocationCoordinate2D(latitude: 59.9044, longitude: 10.6829)
+    static let myHome = CLLocationCoordinate2D(latitude: 59.9362, longitude: 10.6433)
+}
+
+// 59.936251999784155, 10.643378035371752
