@@ -40,42 +40,34 @@ struct Buttons: View {
             }
             .buttonStyle(.bordered)
             
-            Button(action: {
-                // Define the action you want to perform when the button is tapped
-                locationViewModel.startTracking()
-            }) {
-                Text("Altitude: \(String(format: "%.0f", locationViewModel.altitude))")
-                    .frame(minWidth: 0, maxWidth: .infinity) // Make the button expand to fill the space
-                    .padding()
+            Button {
+                searchResults = []
+                search(for: "Home")
+            } label: {
+                Label("HOME", systemImage: "homekit")
+            }
+            .buttonStyle(.bordered)
+        
+        
+            Text("Altitude: \(String(format: "%.0f", locationViewModel.altitude)) m.s.l.")
+                    .padding(.vertical, 8) // Match the vertical padding of the buttons
+                
+                    .frame(minWidth: 0, maxWidth: .infinity) // Make the Text expand to fill the space
                     .background(Color.orange)
                     .foregroundColor(.white)
-                    .font(.system(size: 17))
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-            }
-            .buttonStyle(.bordered) // Apply the bordered button style if you wish
-//            .onAppear {
-//                locationViewModel.startTracking()
-//            }
-
-            
-//            Text("\(String(format: "%.0f", locationViewModel.altitude))")
-//                .padding(.vertical, 8) // Match vertical padding to the buttons' default
-//                .padding(.horizontal, 16) // Match horizontal padding to the buttons' default
-//                .frame(minHeight: 44) // Default minimum tap target for buttons in iOS
-//                .background(Color.white)
-//                .foregroundColor(.blue)
-//                .font(.system(size: 17)) // Match the default font size of button labels
-//                .clipShape(RoundedRectangle(cornerRadius: 8)) // Match the corner radius to the buttons' default
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 8)
-//                        .stroke(Color.blue, lineWidth: 1) // Add a border similar to the bordered button style
-//                )
-//                .onAppear { locationViewModel.startTracking() }
+                    .font(.system(size: 17)) // Match the font size of the button labels
+                    .clipShape(RoundedRectangle(cornerRadius: 8)) // Match the shape of the buttons
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8) // To match the border style of the buttons
+                            .stroke(Color.orange, lineWidth: 1)
+                    )
+                    .onAppear { locationViewModel.startTracking() }
 
         }
+        .padding(.trailing, 10)
         .labelStyle(.iconOnly)
     }
-        
+   
     func search(for query: String) {
         
         let request = MKLocalSearch.Request()
@@ -86,10 +78,61 @@ struct Buttons: View {
         request.region = region
         
         Task {
-            let search = MKLocalSearch(request: request)
-            let response = try? await search.start()
-            searchResults = response?.mapItems ?? []
-        }
+               let search = MKLocalSearch(request: request)
+               let response = try? await search.start()
+               
+               // Get the current search results
+               var currentSearchResults = response?.mapItems ?? []
+               
+               // Create the "HOME" placemark with fixed coordinates
+
+               let homeCoordinate = CLLocationCoordinate2D.myHome
+               let homePlacemark = MKPlacemark(coordinate: homeCoordinate)
+               let homeMapItem = MKMapItem(placemark: homePlacemark)
+               homeMapItem.name = "HOME" // Set the name for the pin
+               
+               // Append the "HOME" map item to the current search results
+               currentSearchResults.append(homeMapItem)
+               
+               // Update the searchResults with the current results including "HOME"
+               searchResults = currentSearchResults
+           }
     }
     
+    
 }
+
+//Kitchensink
+
+//Button(action: {
+//                // Define the action you want to perform when the button is tapped
+//                locationViewModel.startTracking()
+//            }) {
+//                Text("Altitude: \(String(format: "%.0f", locationViewModel.altitude)) m.s.l.")
+//                    .frame(minWidth: 0, maxWidth: .infinity) // Make the button expand to fill the space
+//                    .padding()
+//                    .background(Color.orange)
+//                    .foregroundColor(.white)
+//                    .font(.system(size: 17))
+//                    .clipShape(RoundedRectangle(cornerRadius: 8))
+//            }
+//            .buttonStyle(.bordered) // Apply the bordered button style if you wish
+//            .onAppear { locationViewModel.startTracking() }
+
+
+
+//    func search(for query: String) {
+//
+//        let request = MKLocalSearch.Request()
+//        request.naturalLanguageQuery = query
+//        request.resultTypes = .pointOfInterest
+//
+//        guard let region = visibleRegion else { return }
+//        request.region = region
+//
+//        Task {
+//            let search = MKLocalSearch(request: request)
+//            let response = try? await search.start()
+//            searchResults = response?.mapItems ?? []
+//        }
+//    }
