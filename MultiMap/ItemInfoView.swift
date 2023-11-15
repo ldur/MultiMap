@@ -32,6 +32,23 @@ struct ItemInfoView: View {
                     if let travelTime {
                         Text(travelTime)
                     }
+                    if let travelDistance {
+                        Text(travelDistance)
+                    }
+                    if let tollImage = tollImage {
+                        tollImage
+                            .resizable() // Make the image resizable
+                            .scaledToFit() // Scale the image to fit the frame
+                            .frame(width: 30, height: 30) // Set the frame of the image
+                            // Additional modifiers as needed
+                    }
+                    if let highwayImage = highwayImage {
+                        highwayImage
+                            .resizable() // Make the image resizable
+                            .scaledToFit() // Scale the image to fit the frame
+                            .frame(width: 30, height: 30) // Set the frame of the image
+                            // Additional modifiers as needed
+                    }
                 }
                 .font(.caption)
                 .foregroundStyle(.white)
@@ -50,7 +67,26 @@ struct ItemInfoView: View {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .abbreviated
         formatter.allowedUnits = [.hour, .minute]
-        return formatter.string(from: route.expectedTravelTime)        
+        
+        return formatter.string(from: route.expectedTravelTime)
+    }
+    private var travelDistance: String? {
+        guard let route else { return nil }
+        let distanceInMeters = route.distance
+        
+        let distanceInKilometers = distanceInMeters / 1000
+        let formattedDistance = String(format: "%.1f km", distanceInKilometers)
+
+        return formattedDistance
+        
+    }
+    private var tollImage: Image? {
+        guard let route = route, route.hasTolls else { return nil }
+        return Image(systemName: "creditcard")
+    }
+    private var highwayImage: Image? {
+        guard let route = route, route.hasHighways else { return nil }
+        return Image(systemName: "arrow.triangle.turn.up.right.circle")
     }
     
 }

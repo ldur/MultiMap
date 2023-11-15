@@ -78,10 +78,7 @@ struct ContentView: View {
                 Marker(item: result)
             }
             .annotationTitles(.hidden)
-//            Marker("HOME", coordinate: .myHome)
-//                .tint(.orange)
-//                  .tag(9999)
-            
+    
             if let route {
                 MapPolyline(route)
                     .stroke(.blue, lineWidth: 5)
