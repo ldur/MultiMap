@@ -1,37 +1,43 @@
 {
   "images" : [
     {
-      "filename" : "appicon.png",
+      "filename" : "DALL·E 2023-11-15 12.38.34 - can you create an image to be used as my app logo and launch screen image that has elements of a map and navigation with the colors orange and blue.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
     },
     {
+      "filename" : "DALL·E 2023-11-15 12.38.34 - can you create an image to be used as my app logo and launch screen image that has elements of a map and navigation with the colors orange and blue 1.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
+      "filename" : "DALL·E 2023-11-15 12.38.34 - can you create an image to be used as my app logo and launch screen image that has elements of a map and navigation with the colors orange and blue 2.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
+      "filename" : "DALL·E 2023-11-15 12.38.34 - can you create an image to be used as my app logo and launch screen image that has elements of a map and navigation with the colors orange and blue 3.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
+      "filename" : "DALL·E 2023-11-15 12.38.34 - can you create an image to be used as my app logo and launch screen image that has elements of a map and navigation with the colors orange and blue 4.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
+      "filename" : "DALL·E 2023-11-15 12.38.34 - can you create an image to be used as my app logo and launch screen image that has elements of a map and navigation with the colors orange and blue 5.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
+      "filename" : "DALL·E 2023-11-15 12.38.34 - can you create an image to be used as my app logo and launch screen image that has elements of a map and navigation with the colors orange and blue 6.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"

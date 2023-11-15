@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		439163832B04E997008A4816 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439163822B04E997008A4816 /* Launch Screen.storyboard */; };
 		D33C711A2A6F0D6C0020F0E3 /* MultiMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C71192A6F0D6C0020F0E3 /* MultiMapApp.swift */; };
 		D33C711C2A6F0D6C0020F0E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C711B2A6F0D6C0020F0E3 /* ContentView.swift */; };
 		D33C711E2A6F0D6F0020F0E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D33C711D2A6F0D6F0020F0E3 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		439163822B04E997008A4816 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D33C71162A6F0D6C0020F0E3 /* MultiMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33C71192A6F0D6C0020F0E3 /* MultiMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiMapApp.swift; sourceTree = "<group>"; };
 		D33C711B2A6F0D6C0020F0E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				D33C711D2A6F0D6F0020F0E3 /* Assets.xcassets */,
 				D33C711F2A6F0D6F0020F0E3 /* MultiMap.entitlements */,
 				D33C71202A6F0D6F0020F0E3 /* Preview Content */,
+				439163822B04E997008A4816 /* Launch Screen.storyboard */,
 			);
 			path = MultiMap;
 			sourceTree = "<group>";
@@ -133,6 +136,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				439163832B04E997008A4816 /* Launch Screen.storyboard in Resources */,
 				D33C71222A6F0D6F0020F0E3 /* Preview Assets.xcassets in Resources */,
 				D33C711E2A6F0D6F0020F0E3 /* Assets.xcassets in Resources */,
 			);
@@ -274,6 +278,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = MultiMap/MultiMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -290,6 +295,7 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -314,6 +320,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = MultiMap/MultiMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -330,6 +337,7 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
