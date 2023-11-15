@@ -20,16 +20,22 @@ struct Buttons: View {
     var body: some View {
         HStack {
             Button {
-                search(for: "playground")
+                search(for: "restaurants", categories: [.restaurant, .cafe, .bakery, .nightlife, .theater, .hotel])
             } label: {
-                Label("Playgrounds", systemImage: "figure.and.child.holdinghands")
+                Label("Restaurants", systemImage: "cart")
             }
             .buttonStyle(.bordered)
             
             Button {
-                search(for: "beach")
+                search(for: "transportation", categories: [.airport, .publicTransport, .parking])
             } label: {
-                Label("Beaches", systemImage: "beach.umbrella")
+                Label("Transportation", systemImage: "bus")
+            }
+            .buttonStyle(.bordered)
+            Button {
+                search(for: "charger", categories: [.evCharger])
+            } label: {
+                Label("Charger", systemImage: "bolt.car")
             }
             .buttonStyle(.bordered)
                    
@@ -42,11 +48,13 @@ struct Buttons: View {
             
             Button {
                 searchResults = []
-                search(for: "Home")
+                home(for: "home")
             } label: {
-                Label("HOME", systemImage: "homekit")
+                Label("Home", systemImage: "homekit")
             }
             .buttonStyle(.bordered)
+            
+            
         
         
             Text("Altitude: \(String(format: "%.0f", locationViewModel.altitude)) m.s.l.")
@@ -68,11 +76,17 @@ struct Buttons: View {
         .labelStyle(.iconOnly)
     }
    
-    func search(for query: String) {
+    func search(for query: String, categories: [MKPointOfInterestCategory]) {
         
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
         request.resultTypes = .pointOfInterest
+        
+        // Create a filter with the specified categories.
+        let filter = MKPointOfInterestFilter(including: categories)
+            
+            // Apply the filter to the request.
+        request.pointOfInterestFilter = filter
         
         guard let region = visibleRegion else { return }
         request.region = region
@@ -85,22 +99,27 @@ struct Buttons: View {
                var currentSearchResults = response?.mapItems ?? []
                
                // Create the "HOME" placemark with fixed coordinates
-
-               let homeCoordinate = CLLocationCoordinate2D.myHome
-               let homePlacemark = MKPlacemark(coordinate: homeCoordinate)
-               let homeMapItem = MKMapItem(placemark: homePlacemark)
-               homeMapItem.name = "HOME" // Set the name for the pin
-               
-               // Append the "HOME" map item to the current search results
-               currentSearchResults.append(homeMapItem)
-               
-               // Update the searchResults with the current results including "HOME"
+//
+//               let homeCoordinate = CLLocationCoordinate2D.myHome
+//               let homePlacemark = MKPlacemark(coordinate: homeCoordinate)
+//               let homeMapItem = MKMapItem(placemark: homePlacemark)
+//               homeMapItem.name = "HOME" // Set the name for the pin
+//               
+//               // Append the "HOME" map item to the current search results
+//               currentSearchResults.append(homeMapItem)
+//               
+//               // Update the searchResults with the current results including "HOME"
                searchResults = currentSearchResults
            }
     }
     
     
+    
 }
+    
+
+
+//}
 
 //Kitchensink
 
