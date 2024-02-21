@@ -46,13 +46,13 @@ struct Buttons: View {
             }
             .buttonStyle(.bordered)
             
-            Button {
-                searchResults = []
-                home(for: "home")
-            } label: {
-                Label("Home", systemImage: "homekit")
-            }
-            .buttonStyle(.bordered)
+//        Button {
+//               searchResults = []
+//               home(for: "home")
+//           } label: {
+//               Label("Home", systemImage: "homekit")
+//          } 
+//           .buttonStyle(.bordered)
             
             
         
